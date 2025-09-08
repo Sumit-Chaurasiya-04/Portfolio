@@ -1,0 +1,23 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Editors
+.vscode/
+.idea/
+
+# Env
+.env
+
+# Builds (if ever used)
+dist/
+build/
+
+# Node (if added later)
+node_modules/
+
+
