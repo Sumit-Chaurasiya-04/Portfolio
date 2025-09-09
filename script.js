@@ -93,7 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   
     backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const behavior = prefersReduced.matches ? 'auto' : 'smooth';
+      window.scrollTo({ top: 0, behavior });
     });
   
     // Contact form validation
@@ -135,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       };
   
-      form.addEventListener('submit', (event) => {
+      form.addEventListener('submit', async (event) => {
         clearValidity();
         let valid = true;
   
@@ -169,11 +171,60 @@ document.addEventListener('DOMContentLoaded', () => {
           event.preventDefault();
           return;
         }
-  
-        // Placeholder success handling
+        
+        // Submit via fetch to Formspree with honeypot
         event.preventDefault();
-        alert('Thanks! Your message has been sent.');
-        form.reset();
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton ? submitButton.textContent : '';
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = 'Sending...';
+        }
+        const formData = new FormData(form);
+        // Abort if honeypot filled
+        if ((formData.get('company') || '').toString().trim() !== '') {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = originalText || 'Send';
+          }
+          return;
+        }
+        try {
+          const response = await fetch(form.getAttribute('action') || '#', {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+          const ok = response.ok;
+          const msg = ok ? 'Thanks! Your message has been sent.' : 'Sorry, something went wrong.';
+          const toast = document.createElement('div');
+          toast.className = 'toast';
+          toast.textContent = msg;
+          document.body.appendChild(toast);
+          void toast.offsetHeight; // reflow
+          toast.classList.add('show');
+          setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 300);
+          }, 2200);
+          if (ok) form.reset();
+        } catch (_) {
+          const toast = document.createElement('div');
+          toast.className = 'toast';
+          toast.textContent = 'Network error. Please try again later.';
+          document.body.appendChild(toast);
+          void toast.offsetHeight;
+          toast.classList.add('show');
+          setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 300);
+          }, 2200);
+        } finally {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = originalText || 'Send';
+          }
+        }
       });
   
       const liveValidate = () => {
@@ -253,3 +304,28 @@ document.addEventListener('DOMContentLoaded', () => {
     );
     revealElements.forEach((el) => observer.observe(el));
   });
+
+  // Set aria-current="page" on active nav link during scroll
+  const sections = Array.from(document.querySelectorAll('main section, header.site-header'));
+  const updateActiveLink = () => {
+    const scrollY = window.scrollY + (navbar ? navbar.getBoundingClientRect().height + 16 : 0);
+    let currentId = 'home';
+    for (const section of sections) {
+      const rect = section.getBoundingClientRect();
+      const top = rect.top + window.scrollY;
+      if (scrollY >= top - 1) {
+        currentId = section.id || 'home';
+      }
+    }
+    navLinks.forEach((link) => {
+      const href = link.getAttribute('href') || '';
+      const id = href.startsWith('#') ? href.slice(1) : '';
+      if (id && id === currentId) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  };
+  updateActiveLink();
+  window.addEventListener('scroll', updateActiveLink, { passive: true });

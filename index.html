@@ -4,13 +4,32 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Portfolio Website</title>
+    <meta name="description" content="Portfolio of Sumit Chaurasiya — projects, skills, and contact information. Computer Science student, developer, and freelance tutor.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Sumit Chaurasiya">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Sumit Chaurasiya — Portfolio">
+    <meta property="og:description" content="Projects, skills, and contact. Computer Science student, developer, and freelance tutor.">
+    <meta property="og:image" content="/assets/og-cover.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sumit Chaurasiya — Portfolio">
+    <meta name="twitter:description" content="Projects, skills, and contact. Computer Science student, developer, and freelance tutor.">
+    <meta name="twitter:image" content="/assets/og-cover.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="assets/avatar.svg">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header id="home" class="site-header">
       <nav class="navbar" role="navigation" aria-label="Main">
         <a class="brand" href="#home">Sumit Chaurasiya</a>
@@ -25,14 +44,17 @@
       </nav>
       <section class="hero">
         <div class="hero-content">
-          <img class="hero-avatar" src="https://plus.unsplash.com/premium_vector-1733378341123-e021d04f332f?q=80&w=435&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Tech-themed avatar for Sumit Chaurasiya">
+          <picture>
+            <source type="image/webp" srcset="assets/avatar.webp">
+            <img class="hero-avatar" src="assets/avatar.svg" alt="Tech-themed avatar for Sumit Chaurasiya" width="220" height="220" decoding="async" fetchpriority="high">
+          </picture>
           <h1>Hi, I'm <span class="accent-name">Sumit Chaurasiya</span></h1>
           <h2 class="tagline"><span class="typing" aria-live="polite"></span></h2>
           <a class="cta-button" href="#projects">View my work</a>
         </div>
       </section>
     </header>
-    <main>
+    <main id="main-content">
       <section id="about" class="about reveal">
         <h2>About Me</h2>
         <p>I’m Sumit Chaurasiya from Noida, Uttar Pradesh, India. I’m pursuing a B.Sc. in Computer Science (2024–27). I code in C, C++, Python, and JavaScript, explore SQL databases and AI tools, and I’ve taught over 180 students as a freelance tutor. I enjoy building clean, responsive, and user‑friendly applications and continuously sharpening my problem‑solving skills.</p>
@@ -96,7 +118,7 @@
           <p id="contact-subtitle">I'd love to hear from you! Fill out the form below.</p>
         </header>
         <div class="contact-layout" aria-describedby="contact-subtitle">
-          <form class="contact-form" action="#" method="post">
+          <form class="contact-form" action="https://formspree.io/f/xyzdogaz" method="post" novalidate>
             <label for="name">Name</label>
             <input type="text" id="name" name="name" autocomplete="name" required>
 
@@ -108,6 +130,9 @@
 
             <label for="message">Message</label>
             <textarea id="message" name="message" rows="6" required></textarea>
+
+            <!-- Honeypot for bots -->
+            <input type="text" name="company" id="company" autocomplete="organization" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;" >
 
             <button type="submit">Send</button>
           </form>
@@ -156,5 +181,7 @@
         </a>
       </div>
     </footer>
+    <!-- Plausible analytics (replace data-domain with your domain) -->
+    <script defer data-domain="https://sumit-chaurasiya-04.github.io/portfolio/" src="https://plausible.io/js/script.js"></script>
   </body>
 </html>

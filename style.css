@@ -34,6 +34,22 @@
     scroll-behavior: smooth;
   }
   
+  /* Skip link */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 12px;
+    padding: 8px 12px;
+    background: var(--accent);
+    color: #06131f;
+    border-radius: 8px;
+    transition: top 160ms ease;
+    z-index: 1100;
+  }
+  .skip-link:focus {
+    top: 8px;
+  }
+  
   body {
     margin: 0;
     font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
@@ -98,6 +114,13 @@
     color: var(--accent);
     opacity: 1;
     background: rgba(56, 189, 248, 0.08);
+  }
+  
+  /* Active nav link via aria-current */
+  .nav-links a[aria-current="page"] {
+    color: var(--accent);
+    background: rgba(56, 189, 248, 0.12);
+    font-weight: 600;
   }
   
   .hamburger {
@@ -483,6 +506,15 @@
     transform: translateY(0);
   }
   
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
   /* Contact */
   .contact-form {
     display: grid;
@@ -527,6 +559,29 @@
     color: var(--accent);
     border-color: var(--accent);
     transform: scale(1.03);
+  }
+  
+  /* Toast notifications */
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    border-radius: 10px;
+    padding: 10px 14px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease, transform 200ms ease;
+    z-index: 1200;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-6px);
+    pointer-events: auto;
   }
   
   /* Contact layout */
@@ -598,3 +653,24 @@
     color: var(--accent);
     transform: translateY(-2px);
   }  
+  
+  /* Accessible focus styles */
+  .nav-links a:focus-visible,
+  .cta-button:focus-visible,
+  .theme-toggle:focus-visible,
+  .hamburger:focus-visible,
+  .contact-form input:focus-visible,
+  .contact-form textarea:focus-visible,
+  .contact-form button:focus-visible,
+  .contact-details a:focus-visible,
+  .social-links a:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.35), 0 0 0 6px rgba(56, 189, 248, 0.18);
+    border-color: rgba(56, 189, 248, 0.6);
+  }
+  
+  /* Improve light theme navbar readability */
+  :root.light .navbar {
+    background: rgba(255, 255, 255, 0.7);
+    border-bottom-color: rgba(15, 23, 42, 0.08);
+  }
