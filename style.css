@@ -1,3 +1,133 @@
+/*
+  Fresh portfolio stylesheet
+  - Responsive grid layout
+  - Clear typographic scale using Poppins (loaded in HTML)
+  - Light/dark theme tokens
+  - Accessible focus states
+  - Clean card and project styles
+*/
+
+:root{
+  --bg: #0f1724;
+  --surface: rgba(255,255,255,0.03);
+  --card: rgba(255,255,255,0.04);
+  --text: #eef2f7;
+  --muted: #9aa6b8;
+  --accent: #06b6d4; /* teal-blue */
+  --accent-2: #60a5fa;
+  --radius: 14px;
+  --nav-h: 68px;
+  --container: 1100px;
+}
+
+:root.light{
+  --bg: #f7f8fb;
+  --surface: rgba(10,14,22,0.02);
+  --card: #ffffff;
+  --text: #0b1220;
+  --muted: #5b6b7a;
+  --accent: #007aff;
+  --accent-2: #34c3ff;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, 'Helvetica Neue', Arial;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Generic container to align content */
+.container{max-width:var(--container);margin:0 auto;padding:0 24px}
+
+/* Skip link */
+.skip-link{position:absolute;left:16px;top:-48px;padding:8px 12px;background:var(--accent);color:#051019;border-radius:8px;z-index:1100}
+.skip-link:focus{top:12px}
+
+/* NAVBAR */
+.navbar{position:fixed;left:0;right:0;top:0;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));backdrop-filter:blur(8px);z-index:1000}
+.brand{font-weight:700}
+.nav-links{display:flex;gap:20px;list-style:none;margin:0;padding:0}
+.nav-links a{color:var(--text);padding:8px 10px;border-radius:8px}
+.nav-links a:hover{color:var(--accent)}
+.hamburger,.theme-toggle{display:none;border:1px solid rgba(255,255,255,0.04);background:var(--surface);color:var(--text);width:40px;height:40px;border-radius:10px}
+
+/* HERO */
+.site-header{padding-top:var(--nav-h)}
+.hero{min-height:calc(100vh - var(--nav-h));display:flex;align-items:center}
+.hero-content{width:100%;}
+.hero-content{display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.hero-content .container{display:flex;align-items:center;gap:28px}
+.hero-avatar{width:160px;height:160px;border-radius:50%;border:2px solid rgba(255,255,255,0.04);object-fit:cover}
+.hero-content h1{font-size:clamp(1.8rem,4vw,2.8rem);margin:0}
+.accent-name{color:var(--accent)}
+.tagline{color:var(--muted);font-weight:500}
+.cta-button{display:inline-block;background:linear-gradient(180deg,var(--accent),var(--accent-2));color:#02141a;padding:10px 16px;border-radius:999px;font-weight:600}
+
+/* SECTIONS */
+section{padding:64px 0}
+section .container{padding-left:24px;padding-right:24px}
+
+h2{font-size:clamp(1.6rem,3.2vw,2.4rem);margin:0 0 18px}
+h3{font-size:1.05rem;margin:0 0 12px}
+
+.about p{max-width:760px;margin:0 0 22px;color:var(--muted)}
+
+/* Skills grid */
+.skills-grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:20px}
+@media(min-width:640px){.skills-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.skills-grid{grid-template-columns:repeat(3,1fr)}}
+.skill-card{background:var(--card);border:1px solid rgba(255,255,255,0.03);padding:18px;border-radius:calc(var(--radius));box-shadow:0 8px 20px rgba(2,6,23,0.35)}
+.skill-card h4{margin:0 0 8px}
+.skills-list{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:6px 0 0;list-style:none}
+.skills-list li{background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;color:var(--text);border:1px solid rgba(255,255,255,0.04)}
+
+/* Projects */
+.project-grid{display:grid;grid-template-columns:1fr;gap:26px;margin-top:18px}
+@media(min-width:800px){.project-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1200px){.project-grid{grid-template-columns:repeat(3,1fr)}}
+.project-card{background:var(--card);border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 28px rgba(2,6,23,0.35);display:flex;flex-direction:column}
+.project-thumb img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.project-content{padding:18px;flex:1;display:flex;flex-direction:column}
+.badges{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:10px 0}
+.badges li{background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;font-size:0.9rem}
+.project-actions{margin-top:auto}
+.btn{display:inline-block;padding:8px 12px;background:var(--accent);color:#02141a;border-radius:8px}
+
+/* Contact layout */
+.contact-layout{display:grid;grid-template-columns:1fr;gap:28px;margin-top:14px}
+@media(min-width:900px){.contact-layout{grid-template-columns:1.2fr 0.8fr}}
+.contact-form input,.contact-form textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)}
+.contact-form label{display:block;margin-bottom:6px}
+.contact-details{background:var(--card);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+
+/* Footer */
+.site-footer{padding:28px 0;text-align:center;border-top:1px solid rgba(255,255,255,0.03);margin-top:24px}
+
+/* Responsive nav for smaller screens */
+@media(max-width:900px){
+  .nav-links{display:none}
+  .hamburger,.theme-toggle{display:inline-flex}
+  .hero-content .container{flex-direction:column;align-items:flex-start}
+  .hero-avatar{width:140px;height:140px}
+}
+
+/* Focus states */
+a:focus,button:focus,input:focus,textarea:focus{outline:none;box-shadow:0 0 0 4px rgba(6,182,212,0.12)}
+
+/* Small helpers */
+.reveal{opacity:0;transform:translateY(12px);transition:all 360ms ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* Make sure images are not selectable */
+img{user-select:none}
+
+/* End of stylesheet */
 :root {
     /* Apple-inspired dark theme (default) */
     --bg: #000000;
