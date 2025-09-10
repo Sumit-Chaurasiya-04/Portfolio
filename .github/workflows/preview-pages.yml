@@ -1,0 +1,28 @@
+name: Preview Pages
+
+on:
+  push:
+    branches:
+      - 'feature/*'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-upload:
+    name: Build and upload static site for Pages preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare public directory
+        run: |
+          mkdir -p public
+          # Copy site files to public (adjust if you build with a bundler)
+          cp -R index.html style.css script.js assets public/ || true
+
+      - name: Upload artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: public

@@ -111,7 +111,8 @@
                 <li>Formspree</li>
               </ul>
               <div class="project-actions">
-                <a class="btn" href="https://github.com/Sumit-Chaurasiya-04" target="_blank" rel="noopener">GitHub</a>
+                  <a class="btn" href="https://github.com/Sumit-Chaurasiya-04" target="_blank" rel="noopener">GitHub</a>
+                  <button class="btn case-btn" type="button" data-title="Portfolio Website" data-desc="A polished personal portfolio with theme toggle, accessibility-first markup, and responsive design." data-img="assets/projects/portfolio.svg" data-tech="HTML, CSS, JavaScript">Case Study</button>
               </div>
             </div>
           </article>
@@ -130,6 +131,7 @@
               </ul>
               <div class="project-actions">
                 <a class="btn" href="https://github.com/Sumit-Chaurasiya-04" target="_blank" rel="noopener">GitHub</a>
+                <button class="btn case-btn" type="button" data-title="Stock Management" data-desc="Inventory CRUD application demonstrating localStorage persistence and UI flows." data-img="assets/projects/stock.svg" data-tech="HTML, CSS, JS, LocalStorage">Case Study</button>
               </div>
             </div>
           </article>
@@ -147,9 +149,22 @@
               </ul>
               <div class="project-actions">
                 <a class="btn" href="https://github.com/Sumit-Chaurasiya-04" target="_blank" rel="noopener">GitHub</a>
+                <button class="btn case-btn" type="button" data-title="Tiny Tot Management System" data-desc="UI flows and structured data entry for small-scale management tasks." data-img="assets/projects/tiny-tot.svg" data-tech="HTML, CSS, JavaScript">Case Study</button>
               </div>
             </div>
           </article>
+        </div>
+      </section>
+
+      <!-- Resume / CV Section -->
+      <section id="resume" class="resume reveal">
+        <div class="container">
+          <h2>Resume / CV</h2>
+          <p>Download my resume to view detailed education, projects, and contact information.</p>
+          <div class="resume-actions">
+            <a class="cta-button" href="assets/resume.pdf" download="Sumit-Chaurasiya-Resume.pdf">Download Resume (PDF)</a>
+            <a class="cta-button secondary" href="#contact">Hire Me / Contact</a>
+          </div>
         </div>
       </section>
       <section id="contact" class="contact reveal">
@@ -223,5 +238,16 @@
     </footer>
     <!-- Plausible analytics (replace data-domain with your domain) -->
     <script defer data-domain="https://sumit-chaurasiya-04.github.io/portfolio/" src="https://plausible.io/js/script.js"></script>
+    <!-- Case Study Modal -->
+    <div id="case-modal" class="case-modal" aria-hidden="true" role="dialog" aria-labelledby="case-title">
+      <div class="case-modal-backdrop" data-close></div>
+      <div class="case-modal-panel" role="document">
+        <button class="case-close" aria-label="Close">×</button>
+        <h3 id="case-title">Case Study</h3>
+        <img id="case-img" src="" alt="" style="max-width:100%;border-radius:8px;margin:12px 0;"/>
+        <p id="case-desc"></p>
+        <p id="case-tech" style="font-size:0.95rem;color:var(--muted)"></p>
+      </div>
+    </div>
   </body>
 </html>
