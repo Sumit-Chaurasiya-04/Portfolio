@@ -305,6 +305,56 @@ document.addEventListener('DOMContentLoaded', () => {
     revealElements.forEach((el) => observer.observe(el));
   });
 
+  // CASE STUDY MODAL
+  const caseModal = document.getElementById('case-modal');
+  const caseImg = document.getElementById('case-img');
+  const caseTitle = document.getElementById('case-title');
+  const caseDesc = document.getElementById('case-desc');
+  const caseTech = document.getElementById('case-tech');
+  const closeBtn = caseModal && caseModal.querySelector('.case-close');
+  const openCase = (data) => {
+    if (!caseModal) return;
+    caseTitle.textContent = data.title || 'Case Study';
+    caseDesc.textContent = data.desc || '';
+    caseTech.textContent = data.tech ? 'Tech: ' + data.tech : '';
+    caseImg.src = data.img || '';
+    caseImg.alt = data.title || '';
+    caseModal.setAttribute('aria-hidden', 'false');
+    caseModal.classList.add('open');
+    // simple focus trap
+    const focusable = caseModal.querySelectorAll('button, [href], input, textarea');
+    if (focusable.length) focusable[0].focus();
+  };
+  const closeCase = () => {
+    if (!caseModal) return;
+    caseModal.setAttribute('aria-hidden', 'true');
+    caseModal.classList.remove('open');
+  };
+  document.querySelectorAll('.case-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      openCase({
+        title: btn.dataset.title,
+        desc: btn.dataset.desc,
+        img: btn.dataset.img,
+        tech: btn.dataset.tech
+      });
+    });
+  });
+  closeBtn && closeBtn.addEventListener('click', closeCase);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeCase();
+  });
+  // click on backdrop to close
+  document.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', closeCase));
+
+  // Enhance theme toggle visual update (already toggles .light class in earlier code)
+  // Change the toggle button inner text/icon to be more animated-friendly (using emoji fallback)
+  const updateThemeButton = () => {
+    const isLight = document.documentElement.classList.contains('light');
+    if (themeToggleButton) themeToggleButton.innerHTML = isLight ? '🌙' : '☀️';
+  };
+  updateThemeButton();
+
   // Set aria-current="page" on active nav link during scroll
   const sections = Array.from(document.querySelectorAll('main section, header.site-header'));
   const updateActiveLink = () => {
