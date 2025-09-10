@@ -321,14 +321,18 @@ document.addEventListener('DOMContentLoaded', () => {
     caseImg.alt = data.title || '';
     caseModal.setAttribute('aria-hidden', 'false');
     caseModal.classList.add('open');
-    // simple focus trap
-    const focusable = caseModal.querySelectorAll('button, [href], input, textarea');
-    if (focusable.length) focusable[0].focus();
+  // full focus trap: save previously focused element and trap Tab key
+  previousActive = document.activeElement;
+  const focusable = Array.from(caseModal.querySelectorAll('a[href], button:not([disabled]), input, textarea, select, [tabindex]:not([tabindex="-1"])')).filter(el => el.offsetParent !== null);
+  modalFocusable = focusable;
+  if (focusable.length) focusable[0].focus();
   };
   const closeCase = () => {
     if (!caseModal) return;
     caseModal.setAttribute('aria-hidden', 'true');
     caseModal.classList.remove('open');
+  // restore focus
+  if (previousActive && typeof previousActive.focus === 'function') previousActive.focus();
   };
   document.querySelectorAll('.case-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -354,6 +358,54 @@ document.addEventListener('DOMContentLoaded', () => {
     if (themeToggleButton) themeToggleButton.innerHTML = isLight ? '🌙' : '☀️';
   };
   updateThemeButton();
+
+  // Theme toggle animation: add a quick 'pulse' class when toggled
+  let themePulseTimeout = null;
+  if (themeToggleButton) {
+    themeToggleButton.addEventListener('click', () => {
+      themeToggleButton.classList.add('toggling');
+      clearTimeout(themePulseTimeout);
+      themePulseTimeout = setTimeout(() => themeToggleButton.classList.remove('toggling'), 420);
+    });
+  }
+
+  // Focus trap handling for modal: capture Tab/Shift+Tab inside modal
+  let previousActive = null;
+  let modalFocusable = [];
+  document.addEventListener('keydown', (e) => {
+    if (!caseModal || caseModal.getAttribute('aria-hidden') === 'true') return;
+    if (e.key === 'Tab') {
+      // recompute focusable in case DOM changed
+      modalFocusable = Array.from(caseModal.querySelectorAll('a[href], button:not([disabled]), input, textarea, select, [tabindex]:not([tabindex="-1"])')).filter(el => el.offsetParent !== null);
+      if (modalFocusable.length === 0) { e.preventDefault(); return; }
+      const first = modalFocusable[0];
+      const last = modalFocusable[modalFocusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus();
+      }
+    }
+  });
+
+  // PROJECT CARD MICRO-INTERACTIONS: pointer tilt + image parallax
+  document.querySelectorAll('.project-card').forEach((card) => {
+    const img = card.querySelector('img');
+    card.style.transformStyle = 'preserve-3d';
+    card.addEventListener('mousemove', (ev) => {
+      const rect = card.getBoundingClientRect();
+      const x = (ev.clientX - rect.left) / rect.width; // 0..1
+      const y = (ev.clientY - rect.top) / rect.height; // 0..1
+      const rx = (y - 0.5) * 8; // rotate X
+      const ry = (x - 0.5) * -12; // rotate Y
+      card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(6px)`;
+      if (img) img.style.transform = `translateZ(40px) scale(1.03) translateX(${(x - 0.5) * 12}px) translateY(${(y - 0.5) * 10}px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      if (img) img.style.transform = '';
+    });
+  });
 
   // Set aria-current="page" on active nav link during scroll
   const sections = Array.from(document.querySelectorAll('main section, header.site-header'));
