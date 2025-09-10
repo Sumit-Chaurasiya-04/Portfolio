@@ -1,0 +1,8 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "max-empty-lines": 2,
+    "at-rule-no-unknown": [true, {"ignoreAtRules": ["keyframes", "layer"]}],
+    "no-descending-specificity": null
+  }
+}

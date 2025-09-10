@@ -1,0 +1,14 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "stylelint": "^15.10.0",
+    "stylelint-config-standard": "^29.0.0",
+    "html-validate": "^8.3.0"
+  },
+  "scripts": {
+    "lint:css": "stylelint \"**/*.css\"",
+    "lint:html": "html-validate index.html"
+  }
+}
