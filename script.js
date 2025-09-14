@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Typing animation in hero
   if (typedEl) {
-    const roles = ['Web Developer', 'Designer', 'Creator'];
+    const roles = ['Student', 'AI Practitioner', 'Teacher', 'Developer'];
     const typeDelay = 90;
     const deleteDelay = 45;
     const holdDelay = 1200;
