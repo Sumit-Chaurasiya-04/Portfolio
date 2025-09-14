@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # OS generated files
 .DS_Store
 .DS_Store?
@@ -28,3 +29,28 @@ pids
 
 # Optional REPL history
 .node_repl_history
+=======
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Editors
+.vscode/
+.idea/
+
+# Env
+.env
+
+# Builds (if ever used)
+dist/
+build/
+
+# Node (if added later)
+node_modules/
+
+
+>>>>>>> 293e3d3027e3b11f6018c22144e40ed536e82819
