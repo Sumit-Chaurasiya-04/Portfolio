@@ -1,26 +1,41 @@
-# Portfolio — Sumit Chaurasiya
+# Portfolio - Sumit Chaurasiya
 
-A modern, responsive portfolio built with HTML, CSS, and JavaScript. Includes theme toggle, smooth scrolling, typing effect, form validation, and scroll reveal.
+A modern, responsive portfolio website showcasing my skills and projects.
 
-## Deploy on GitHub Pages
-1. Push this repo to GitHub.
-2. In the repo: Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch: main / root.
-3. Your site will be at `https://<your-username>.github.io/<repo-name>/`.
+## Features
 
-## Project Structure
-- `index.html` — content and sections
-- `style.css` — styles and responsive rules
-- `script.js` — interactions and effects
+- 🎨 **Modern Design**: Clean, professional layout with dark/light theme toggle
+- 📱 **Responsive**: Works perfectly on desktop, tablet, and mobile devices
+- ⚡ **Interactive**: Smooth scrolling, typing animations, and hover effects
+- 🌙 **Dark Mode**: Toggle between light and dark themes
+- 📝 **Contact Form**: Validated contact form with smooth interactions
+- 🎯 **Accessibility**: Built with accessibility best practices
 
-## Customize
-- Edit `index.html` (name, avatar URL, skills, projects, links)
-- Edit `style.css` (colors, spacing)
-- Edit `script.js` (typing phrases, validations)
+## Technologies Used
+
+- HTML5
+- CSS3 (with CSS Grid and Flexbox)
+- Vanilla JavaScript
+- Google Fonts (Poppins)
+
+## Live Demo
+
+Visit the live portfolio: [https://sumit-chaurasiya-04.github.io/Portfolio_me/](https://sumit-chaurasiya-04.github.io/Portfolio_me/)
+
+## Sections
+
+- **Hero**: Introduction with typing animation
+- **About**: Bio and skills showcase
+- **Projects**: Portfolio of work with hover effects
+- **Contact**: Interactive contact form
+
+## Getting Started
+
+1. Clone the repository
+2. Open `index.html` in your browser
+3. Or use a local server: `python -m http.server 8000`
 
 ## Contact
-- Email: `sum92082@gmail.com`
-- GitHub: `https://github.com/Sumit-Chaurasiya-04`
-- LinkedIn: `https://www.linkedin.com/in/sumit-chaurasiya-in`
-- X/Twitter: `https://x.com/SumTheGreat04`
 
-
+- GitHub: [@Sumit-Chaurasiya-04](https://github.com/Sumit-Chaurasiya-04)
+- LinkedIn: [Sumit Chaurasiya](https://linkedin.com/in/sumit-chaurasiya-in)
