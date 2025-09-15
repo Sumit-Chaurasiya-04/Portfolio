@@ -188,11 +188,52 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    if (nameInput) {
+      nameInput.addEventListener('input', () => clearFieldError(nameInput));
+      nameInput.addEventListener('blur', () => {
+        const value = nameInput.value.trim();
+        if (value.length === 0) {
+          setFieldError(nameInput, 'Name cannot be empty.');
+        } else {
+          clearFieldError(nameInput);
+        }
+      });
+    }
+
     if (emailInput) {
       emailInput.addEventListener('input', () => clearFieldError(emailInput));
+      emailInput.addEventListener('blur', () => {
+        const value = emailInput.value.trim();
+        if (!value || !isValidEmail(value)) {
+          setFieldError(emailInput, 'Please enter a valid email address.');
+        } else {
+          clearFieldError(emailInput);
+        }
+      });
     }
+
+    if (subjectInput) {
+      subjectInput.addEventListener('input', () => clearFieldError(subjectInput));
+      subjectInput.addEventListener('blur', () => {
+        const value = subjectInput.value.trim();
+        if (value.length === 0) {
+          setFieldError(subjectInput, 'Subject cannot be empty.');
+        } else {
+          clearFieldError(subjectInput);
+        }
+      });
+    }
+
     if (messageInput) {
       messageInput.addEventListener('input', () => clearFieldError(messageInput));
+      messageInput.addEventListener('blur', () => {
+        const value = messageInput.value.trim();
+        if (value.length === 0) {
+          setFieldError(messageInput, 'Message cannot be empty.');
+        } else {
+          clearFieldError(messageInput);
+        }
+      });
     }
   }
 
