@@ -23,6 +23,52 @@
   --accent: #7c3aed;
   --ring: rgba(37, 99, 235, 0.25);
 }
+[data-theme="light"] body { color: var(--text); background: var(--bg); }
+[data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3, [data-theme="light"] p { color: var(--text); }
+[data-theme="light"] a:not(.btn) { color: #1f3b66; }
+[data-theme="light"] a:not(.btn):hover { color: #0b1220; }
+
+/* Light theme component overrides for contrast */
+[data-theme="light"] header {
+  background: rgba(255,255,255,0.75);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+[data-theme="light"] .nav-links a:hover,
+[data-theme="light"] .nav-links a:focus {
+  background: rgba(0,0,0,0.06);
+}
+[data-theme="light"] .hero {
+  background:
+    radial-gradient(900px 600px at 20% -10%, rgba(37, 99, 235, 0.18), transparent 60%),
+    radial-gradient(900px 600px at 85% 0%, rgba(124, 58, 237, 0.16), transparent 60%),
+    linear-gradient(180deg, #f7fbff 0%, #eef5ff 100%);
+}
+[data-theme="light"] .hero-image {
+  background: linear-gradient(145deg, #f1f5ff, #e8efff);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+[data-theme="light"] .skills-list li,
+[data-theme="light"] .project-card,
+[data-theme="light"] .contact form,
+[data-theme="light"] .footer .social-links a {
+  background: #ffffff;
+  border-color: rgba(0,0,0,0.08);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+[data-theme="light"] input,
+[data-theme="light"] textarea {
+  background: #ffffff;
+  border-color: rgba(0,0,0,0.12);
+  color: var(--text);
+}
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder {
+  color: #637085;
+}
+[data-theme="light"] .footer {
+  background: rgba(255,255,255,0.8);
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
 
 * { box-sizing: border-box; }
 html, body { height: 100%; }
