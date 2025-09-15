@@ -10,14 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return header ? header.getBoundingClientRect().height : 0;
   }
 
-  // Expose header height as CSS var for layout (e.g., hero sizing)
-  function syncHeaderHeightVar() {
-    const h = Math.round(getHeaderHeight());
-    document.documentElement.style.setProperty('--header-h', h + 'px');
-  }
-  syncHeaderHeightVar();
-  window.addEventListener('resize', syncHeaderHeightVar);
-
   function smoothScrollTo(targetId) {
     const target = document.querySelector(targetId);
     if (!target) return;
