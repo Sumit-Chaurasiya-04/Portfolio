@@ -88,6 +88,9 @@ body {
   color: var(--text);
   line-height: 1.6;
 }
+/* Skip link */
+.skip-link { position: absolute; left: 0.75rem; top: -100px; background: var(--primary); color: #051221; padding: 0.5rem 0.75rem; border-radius: 8px; z-index: 100; transition: top 150ms ease; }
+.skip-link:focus { top: 0.75rem; outline: none; box-shadow: 0 0 0 4px var(--ring); }
 
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
