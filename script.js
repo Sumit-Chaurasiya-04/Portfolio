@@ -171,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
               successEl.textContent = 'Thanks! Your message has been sent.';
               successEl.hidden = false;
             }
+            alert('Thank you for your message!');
             form.reset();
             return;
           }
@@ -181,6 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Fallback: Mailto submission opens the user's email client
       const mailto = `mailto:sumitchaurasiya381@gmail.com?subject=${encodeURIComponent(subjectLine)}&body=${encodeURIComponent(bodyText)}`;
+      alert('Thank you for your message!');
       window.location.href = mailto;
       if (successEl) {
         successEl.textContent = 'Thanks! Your email app should open with your message.';
