@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Contact form validation
   const form = document.getElementById('contact-form');
+  const nameInput = document.getElementById('name');
   const emailInput = document.getElementById('email');
   const subjectInput = document.getElementById('subject');
   const messageInput = document.getElementById('message');
@@ -112,6 +113,15 @@ document.addEventListener('DOMContentLoaded', () => {
         clearFieldError(emailInput);
         if (!value || !isValidEmail(value)) {
           setFieldError(emailInput, 'Please enter a valid email address.');
+          valid = false;
+        }
+      }
+
+      if (nameInput) {
+        const value = nameInput.value.trim();
+        clearFieldError(nameInput);
+        if (value.length === 0) {
+          setFieldError(nameInput, 'Name cannot be empty.');
           valid = false;
         }
       }
