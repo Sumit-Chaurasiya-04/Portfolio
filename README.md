@@ -20,7 +20,7 @@ A modern, responsive portfolio website showcasing my skills and projects.
 
 ## Live Demo
 
-Visit the live portfolio: [https://sumit-chaurasiya-04.github.io/Portfolio_me/](https://sumit-chaurasiya-04.github.io/Portfolio_me/)
+Visit the live portfolio: [https://sumit-chaurasiya-04.github.io/portfolio/](https://sumit-chaurasiya-04.github.io/portfolio/)
 
 ## Sections
 
