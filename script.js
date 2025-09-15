@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Contact form validation
   const form = document.getElementById('contact-form');
   const emailInput = document.getElementById('email');
+  const subjectInput = document.getElementById('subject');
   const messageInput = document.getElementById('message');
 
   function ensureErrorEl(container) {
@@ -115,6 +116,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
+      if (subjectInput) {
+        const value = subjectInput.value.trim();
+        clearFieldError(subjectInput);
+        if (value.length === 0) {
+          setFieldError(subjectInput, 'Subject cannot be empty.');
+          valid = false;
+        }
+      }
+
       if (messageInput) {
         const value = messageInput.value.trim();
         clearFieldError(messageInput);
@@ -136,13 +146,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       e.preventDefault();
       const nameInput = document.getElementById('name');
-      const subject = `Portfolio Contact from ${nameInput ? nameInput.value.trim() : 'Visitor'}`;
-      const bodyText = `${messageInput ? messageInput.value.trim() : ''}\n\nFrom: ${emailInput ? emailInput.value.trim() : ''}`;
+      const subjectLine = subjectInput && subjectInput.value.trim() ? subjectInput.value.trim() : `Portfolio Contact from ${nameInput ? nameInput.value.trim() : 'Visitor'}`;
+      const bodyText = `${messageInput ? messageInput.value.trim() : ''}\n\nFrom: ${emailInput ? emailInput.value.trim() : ''}${nameInput ? `\nName: ${nameInput.value.trim()}` : ''}`;
 
       const formspreeEndpoint = form.getAttribute('data-formspree');
       if (formspreeEndpoint) {
         try {
-          const payload = { email: emailInput.value.trim(), message: bodyText, name: nameInput ? nameInput.value.trim() : '' };
+          const payload = { email: emailInput.value.trim(), message: bodyText, name: nameInput ? nameInput.value.trim() : '', subject: subjectLine };
           const res = await fetch(formspreeEndpoint, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -162,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Fallback: Mailto submission opens the user's email client
-      const mailto = `mailto:sumitchaurasiya381@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+      const mailto = `mailto:sumitchaurasiya381@gmail.com?subject=${encodeURIComponent(subjectLine)}&body=${encodeURIComponent(bodyText)}`;
       window.location.href = mailto;
       if (successEl) {
         successEl.textContent = 'Thanks! Your email app should open with your message.';
