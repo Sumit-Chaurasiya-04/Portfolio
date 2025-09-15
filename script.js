@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuToggle = document.getElementById('menuToggle');
   const primaryNav = document.getElementById('primary-navigation');
   const typedEl = document.getElementById('typed');
-  const nav = document.getElementById('primary-navigation');
 
   function getHeaderHeight() {
     return header ? header.getBoundingClientRect().height : 0;
@@ -155,7 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       e.preventDefault();
-      const nameInput = document.getElementById('name');
       const subjectLine = subjectInput && subjectInput.value.trim() ? subjectInput.value.trim() : `Portfolio Contact from ${nameInput ? nameInput.value.trim() : 'Visitor'}`;
       const bodyText = `${messageInput ? messageInput.value.trim() : ''}\n\nFrom: ${emailInput ? emailInput.value.trim() : ''}${nameInput ? `\nName: ${nameInput.value.trim()}` : ''}`;
 
@@ -173,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
               successEl.textContent = 'Thanks! Your message has been sent.';
               successEl.hidden = false;
             }
+            alert('Thank you for your message!');
             form.reset();
             return;
           }
@@ -183,6 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Fallback: Mailto submission opens the user's email client
       const mailto = `mailto:sumitchaurasiya381@gmail.com?subject=${encodeURIComponent(subjectLine)}&body=${encodeURIComponent(bodyText)}`;
+      alert('Thank you for your message!');
       window.location.href = mailto;
       if (successEl) {
         successEl.textContent = 'Thanks! Your email app should open with your message.';
@@ -190,11 +190,52 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    if (nameInput) {
+      nameInput.addEventListener('input', () => clearFieldError(nameInput));
+      nameInput.addEventListener('blur', () => {
+        const value = nameInput.value.trim();
+        if (value.length === 0) {
+          setFieldError(nameInput, 'Name cannot be empty.');
+        } else {
+          clearFieldError(nameInput);
+        }
+      });
+    }
+
     if (emailInput) {
       emailInput.addEventListener('input', () => clearFieldError(emailInput));
+      emailInput.addEventListener('blur', () => {
+        const value = emailInput.value.trim();
+        if (!value || !isValidEmail(value)) {
+          setFieldError(emailInput, 'Please enter a valid email address.');
+        } else {
+          clearFieldError(emailInput);
+        }
+      });
     }
+
+    if (subjectInput) {
+      subjectInput.addEventListener('input', () => clearFieldError(subjectInput));
+      subjectInput.addEventListener('blur', () => {
+        const value = subjectInput.value.trim();
+        if (value.length === 0) {
+          setFieldError(subjectInput, 'Subject cannot be empty.');
+        } else {
+          clearFieldError(subjectInput);
+        }
+      });
+    }
+
     if (messageInput) {
       messageInput.addEventListener('input', () => clearFieldError(messageInput));
+      messageInput.addEventListener('blur', () => {
+        const value = messageInput.value.trim();
+        if (value.length === 0) {
+          setFieldError(messageInput, 'Message cannot be empty.');
+        } else {
+          clearFieldError(messageInput);
+        }
+      });
     }
   }
 
@@ -266,19 +307,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Mobile nav toggle
   if (menuToggle && primaryNav) {
-    menuToggle.addEventListener('click', () => {
-      const isOpen = document.body.classList.toggle('nav-open');
+    function setMenuState(isOpen) {
+      document.body.classList.toggle('nav-open', isOpen);
       menuToggle.setAttribute('aria-expanded', String(isOpen));
       menuToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    }
+
+    menuToggle.addEventListener('click', () => {
+      const nextState = !document.body.classList.contains('nav-open');
+      setMenuState(nextState);
     });
 
     // Close menu when clicking a link
     primaryNav.querySelectorAll('a[href^="#"]').forEach((link) => {
-      link.addEventListener('click', () => {
-        document.body.classList.remove('nav-open');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.setAttribute('aria-label', 'Open menu');
-      });
+      link.addEventListener('click', () => setMenuState(false));
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && document.body.classList.contains('nav-open')) {
+        setMenuState(false);
+      }
+    });
+
+    // Close when clicking outside the menu when open (on small screens)
+    document.addEventListener('click', (event) => {
+      const clickTarget = event.target;
+      const isClickInsideNav = primaryNav.contains(clickTarget);
+      const isClickOnToggle = menuToggle.contains(clickTarget);
+      if (document.body.classList.contains('nav-open') && !isClickInsideNav && !isClickOnToggle) {
+        setMenuState(false);
+      }
     });
   }
 

@@ -7,12 +7,15 @@
   <meta name="description" content="Portfolio of Sumit Chaurasiya — B.Sc. CS student, web developer, and teacher. Projects, skills, and contact information." />
   <meta name="author" content="Sumit Chaurasiya" />
   <meta name="theme-color" content="#0b0f14" />
+  <meta name="robots" content="index, follow" />
+  <meta name="color-scheme" content="dark light" />
   <link rel="icon" href="assets/images/avatar.png" type="image/png" />
+  <link rel="canonical" href="https://sumit-chaurasiya-04.github.io/portfolio/" />
   <meta property="og:title" content="Sumit Chaurasiya • Portfolio" />
   <meta property="og:description" content="B.Sc. CS student, web developer, and teacher. Explore projects, skills, and contact details." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="assets/images/avatar.png" />
-  <meta property="og:url" content="https://sumit-chaurasiya-04.github.io/Portfolio_me/" />
+  <meta property="og:url" content="https://sumit-chaurasiya-04.github.io/portfolio/" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -20,6 +23,7 @@
   
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header>
     <nav>
       <a href="#home" class="logo">My Portfolio</a>
@@ -40,8 +44,14 @@
     </nav>
   </header>
 
+  <main id="main-content" tabindex="-1">
   <section id="home" class="hero">
     <div class="container">
+      <div class="bg-blobs" aria-hidden="true">
+        <span class="blob blob-a"></span>
+        <span class="blob blob-b"></span>
+        <span class="blob blob-c"></span>
+      </div>
       <div class="hero-content">
         <h1>Hi, I'm Sumit Chaurasiya</h1>
         <p class="typing" aria-live="polite" aria-atomic="true">
@@ -54,7 +64,7 @@
         </div>
       </div>
       <div class="hero-image">
-        <img src="assets/images/avatar.png" alt="Profile picture" />
+        <img src="assets/images/avatar.png" alt="Profile picture" width="260" height="260" loading="eager" decoding="async" fetchpriority="high" />
       </div>
     </div>
   </section>
@@ -93,21 +103,21 @@
       <h2>Projects</h2>
       <div class="projects-grid">
         <article class="project-card">
-          <img src="assets/images/project1.jpg" alt="Student Performance Tracker screenshot" />
+          <img src="assets/images/project1.jpg" alt="Student Performance Tracker screenshot" loading="lazy" decoding="async" />
           <h3>Student Performance Tracker</h3>
           <p>An Excel-based system for tracking and analyzing student performance data with automated reporting and visualization features.</p>
           <a href="#" class="btn" aria-label="View Student Performance Tracker">View Project</a>
         </article>
 
         <article class="project-card">
-          <img src="assets/images/project2.jpg" alt="Personal Portfolio Website screenshot" />
+          <img src="assets/images/project2.jpg" alt="Personal Portfolio Website screenshot" loading="lazy" decoding="async" />
           <h3>Personal Portfolio Website</h3>
           <p>A modern, responsive portfolio website built with HTML, CSS, and JavaScript featuring dark mode, animations, and mobile-first design.</p>
           <a href="https://github.com/Sumit-Chaurasiya-04/portfolio" class="btn" aria-label="View Personal Portfolio Website">View Project</a>
         </article>
 
         <article class="project-card">
-          <img src="assets/images/project3.jpg" alt="AI Prompt Library screenshot" />
+          <img src="assets/images/project3.jpg" alt="AI Prompt Library screenshot" loading="lazy" decoding="async" />
           <h3>AI Prompt Library for Lesson Plans</h3>
           <p>A curated collection of AI prompts and templates designed to streamline lesson plan creation and educational content generation.</p>
           <a href="#" class="btn" aria-label="View AI Prompt Library">View Project</a>
@@ -118,6 +128,10 @@
 
   <section id="contact" class="contact reveal">
     <div class="container">
+      <div class="bg-blobs" aria-hidden="true">
+        <span class="blob blob-a"></span>
+        <span class="blob blob-b"></span>
+      </div>
       <h2>Get In Touch</h2>
       <p class="contact-subtitle">I'd love to hear from you! Fill out the form below.</p>
       <div class="contact-grid">
@@ -163,7 +177,7 @@
           </nav>
         </aside>
 
-        <form id="contact-form" action="#" method="post" data-formspree="">
+        <form id="contact-form" action="#" method="post" data-formspree="https://formspree.io/f/xyzdogaz">
           <div class="form-group">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" placeholder="Your name" required />
@@ -187,6 +201,7 @@
     </div>
   </section>
 
+  </main>
   <footer class="footer">
     <div class="container">
       <p>&copy; <span id="year"></span> Sumit Chaurasiya</p>
