@@ -3,7 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio</title>
+  <title>Sumit Chaurasiya • Portfolio</title>
+  <meta name="description" content="Portfolio of Sumit Chaurasiya — B.Sc. CS student, web developer, and teacher. Projects, skills, and contact information." />
+  <meta name="author" content="Sumit Chaurasiya" />
+  <meta name="theme-color" content="#0b0f14" />
+  <link rel="icon" href="assets/images/avatar.png" type="image/png" />
+  <meta property="og:title" content="Sumit Chaurasiya • Portfolio" />
+  <meta property="og:description" content="B.Sc. CS student, web developer, and teacher. Explore projects, skills, and contact details." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/images/avatar.png" />
+  <meta property="og:url" content="https://sumit-chaurasiya-04.github.io/Portfolio_me/" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -21,6 +30,7 @@
         <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="Sumit_Chaurasiya_Resume.pdf" download>Resume</a></li>
         <li class="theme-toggle-item">
           <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle theme">
             ☾
@@ -38,10 +48,13 @@
           <span id="typed"></span><span class="cursor" aria-hidden="true">|</span>
         </p>
         <p>I'm a B.Sc. Computer Science student crafting clean, accessible, and responsive web experiences while exploring AI tools and teaching.</p>
-        <a href="#projects" class="btn cta">View Projects</a>
+        <div class="cta-row">
+          <a href="#projects" class="btn cta">View Projects</a>
+          <a href="Sumit_Chaurasiya_Resume.pdf" class="btn" download>Download Resume</a>
+        </div>
       </div>
       <div class="hero-image">
-        <img src="assets/images/avatar.svg" alt="Profile picture" />
+        <img src="assets/images/avatar.png" alt="Profile picture" />
       </div>
     </div>
   </section>
@@ -106,7 +119,7 @@
   <section id="contact" class="contact reveal">
     <div class="container">
       <h2>Contact</h2>
-      <form id="contact-form" action="#" method="post">
+      <form id="contact-form" action="#" method="post" data-formspree="">
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" id="name" name="name" placeholder="Your name" required />
@@ -120,6 +133,7 @@
           <textarea id="message" name="message" rows="5" placeholder="Your message" required></textarea>
         </div>
         <button type="submit" class="btn">Send Message</button>
+        <p id="formSuccess" class="form-success" role="status" aria-live="polite" hidden>Thanks! Your email app should open with your message.</p>
       </form>
     </div>
   </section>

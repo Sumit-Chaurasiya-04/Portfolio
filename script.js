@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuToggle = document.getElementById('menuToggle');
   const primaryNav = document.getElementById('primary-navigation');
   const typedEl = document.getElementById('typed');
+  const nav = document.getElementById('primary-navigation');
 
   function getHeaderHeight() {
     return header ? header.getBoundingClientRect().height : 0;
@@ -102,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       let valid = true;
 
       if (emailInput) {
@@ -123,8 +124,49 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
+      const successEl = document.getElementById('formSuccess');
+
       if (!valid) {
         e.preventDefault();
+        if (successEl) {
+          successEl.hidden = true;
+        }
+        return;
+      }
+
+      e.preventDefault();
+      const nameInput = document.getElementById('name');
+      const subject = `Portfolio Contact from ${nameInput ? nameInput.value.trim() : 'Visitor'}`;
+      const bodyText = `${messageInput ? messageInput.value.trim() : ''}\n\nFrom: ${emailInput ? emailInput.value.trim() : ''}`;
+
+      const formspreeEndpoint = form.getAttribute('data-formspree');
+      if (formspreeEndpoint) {
+        try {
+          const payload = { email: emailInput.value.trim(), message: bodyText, name: nameInput ? nameInput.value.trim() : '' };
+          const res = await fetch(formspreeEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (res.ok) {
+            if (successEl) {
+              successEl.textContent = 'Thanks! Your message has been sent.';
+              successEl.hidden = false;
+            }
+            form.reset();
+            return;
+          }
+        } catch (_) {
+          // fall through to mailto fallback
+        }
+      }
+
+      // Fallback: Mailto submission opens the user's email client
+      const mailto = `mailto:sumitchaurasiya381@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+      window.location.href = mailto;
+      if (successEl) {
+        successEl.textContent = 'Thanks! Your email app should open with your message.';
+        successEl.hidden = false;
       }
     });
 
@@ -235,5 +277,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     revealEls.forEach((el) => observer.observe(el));
+  }
+
+  // Scrollspy: highlight nav link for visible section
+  const sectionIds = ['#home', '#about', '#skills', '#projects', '#contact'];
+  const sectionEls = sectionIds
+    .map((id) => document.querySelector(id))
+    .filter(Boolean);
+
+  function setActiveLink(id) {
+    document.querySelectorAll('nav a[href^="#"]').forEach((a) => a.classList.remove('active'));
+    const active = document.querySelector(`nav a[href="${id}"]`);
+    if (active) active.classList.add('active');
+  }
+
+  if (sectionEls.length) {
+    const spyObserver = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((e) => e.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      if (visible[0]) {
+        setActiveLink(`#${visible[0].target.id}`);
+      }
+    }, {
+      rootMargin: `-${getHeaderHeight() + 8}px 0px -60% 0px`,
+      threshold: [0.2, 0.4, 0.6, 0.8]
+    });
+
+    sectionEls.forEach((el) => spyObserver.observe(el));
+
+    // Initialize active state on load
+    const currentHash = window.location.hash && sectionIds.includes(window.location.hash) ? window.location.hash : '#home';
+    setActiveLink(currentHash);
   }
 });
