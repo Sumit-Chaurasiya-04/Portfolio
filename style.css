@@ -157,10 +157,12 @@ header nav { display: flex; align-items: center; justify-content: space-between;
 .project-card .btn { margin: 0 1rem 1rem; justify-self: start; }
 
 /* Contact */
+.contact { padding: 6.5rem 0; }
+.contact .container { text-align: center; }
 .contact form { width: min(100% - 2rem, 720px); margin: 1rem auto 0; background: var(--card); border: 1px solid rgba(255,255,255,0.06); padding: 1.25rem; border-radius: var(--radius); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
 .contact-subtitle { color: var(--muted); margin-top: -0.25rem; }
 /* Contact layout */
-.contact .contact-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1rem; }
+.contact .contact-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1.25rem; width: min(100% - 2rem, 1000px); margin-inline: auto; }
 .contact-aside { background: var(--card); border: 1px solid rgba(255,255,255,0.06); padding: 1rem; border-radius: var(--radius); box-shadow: 0 8px 20px rgba(0,0,0,0.22); }
 .contact-aside h3 { margin-top: 0; margin-bottom: 0.75rem; font-size: 1.125rem; }
 .contact-aside address { font-style: normal; color: var(--muted); }
